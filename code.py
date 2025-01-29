@@ -4,7 +4,7 @@ from itertools import cycle
 import streamlit as st
 
 # Streamlit file uploader (assuming the file is already in the same directory as the script)
-st.title("Stock Analysis Dashboard")
+st.title("FTSE 100 UK Stock Analysis")
 st.write("Visualize FTSE 100 stock data with an interactive date range slider.")
 
 # Load the dataset
