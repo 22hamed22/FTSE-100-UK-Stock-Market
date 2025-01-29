@@ -37,8 +37,8 @@ start_timestamp, end_timestamp = st.slider(
 start_date = pd.to_datetime(start_timestamp, unit='s')
 end_date = pd.to_datetime(end_timestamp, unit='s')
 
-# Show the selected date range dynamically
-st.write(f"Selected Date Range: {start_date.date()} to {end_date.date()}")
+# Show the selected date range as the first two (min and max) for clarity
+st.write(f"Min Date: {start_date.date()} | Max Date: {end_date.date()}")
 
 # Filter the data based on the selected date range
 filtered_data = data[(data['Date'] >= start_date) & (data['Date'] <= end_date)]
