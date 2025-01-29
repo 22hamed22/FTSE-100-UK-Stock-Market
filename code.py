@@ -4,7 +4,7 @@ from itertools import cycle
 import streamlit as st
 
 # 1. Load your dataset
-data = pd.read_csv('/FTSE 100.csv')
+data = pd.read_csv('FTSE-100.csv')
 
 # 2. Rename the columns for consistency
 data = data.rename(columns={'Price': 'close', 'Vol.': 'volume', 'Change %': 'change'})
