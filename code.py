@@ -23,9 +23,9 @@ max_date = data['Date'].max()
 # User selects the date range via slider
 start_date, end_date = st.slider(
     "Select Date Range",
-    min_value=min_date,
-    max_value=max_date,
-    value=(min_date, max_date),
+    min_value=min_date,  # Pass datetime objects
+    max_value=max_date,  # Pass datetime objects
+    value=(min_date, max_date),  # Pass tuple of datetime objects
     format="YYYY-MM-DD"  # Display format for the slider values
 )
 
@@ -64,3 +64,4 @@ fig.update_yaxes(showgrid=False)
 
 # Show the figure
 st.plotly_chart(fig)
+
