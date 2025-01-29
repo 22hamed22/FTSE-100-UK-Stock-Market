@@ -1,6 +1,6 @@
+tensorflow
 streamlit
 pandas
-tensorflow
 numpy
 matplotlib
 seaborn
