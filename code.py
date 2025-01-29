@@ -20,12 +20,12 @@ data['Date'] = pd.to_datetime(data['Date'])
 min_date = data['Date'].min()
 max_date = data['Date'].max()
 
-# Display the min and max dates below the slider in a human-readable format
-st.write(f"Min Date: {min_date.date()} | Max Date: {max_date.date()}")
-
 # Convert the datetime values to timestamps (numeric format) for the slider
 min_timestamp = min_date.timestamp()
 max_timestamp = max_date.timestamp()
+
+# Display the min and max dates below the slider in a human-readable format
+st.write(f"Min Date: {min_date.date()} | Max Date: {max_date.date()}")
 
 # User selects the date range via slider (based on timestamps)
 start_timestamp, end_timestamp = st.slider(
@@ -39,7 +39,7 @@ start_timestamp, end_timestamp = st.slider(
 start_date = pd.to_datetime(start_timestamp, unit='s')
 end_date = pd.to_datetime(end_timestamp, unit='s')
 
-# Display the selected start and end dates in a readable format
+# Display the selected start and end dates in a readable format (YYYY-MM-DD)
 st.write(f"Selected Date Range: {start_date.date()} to {end_date.date()}")
 
 # Filter the data based on the selected date range
