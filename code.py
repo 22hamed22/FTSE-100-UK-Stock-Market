@@ -30,8 +30,8 @@ st.write(f"Min Date: {min_date.date()} | Max Date: {max_date.date()}")
 # User selects the date range via slider (based on timestamps)
 start_timestamp, end_timestamp = st.slider(
     "Select Date Range",
-    min_value=min_date.date(),
-    max_value=max_date.date(),
+    min_value=min_timestamp,
+    max_value=max_timestamp,
     value=(min_timestamp, max_timestamp)
 )
 
