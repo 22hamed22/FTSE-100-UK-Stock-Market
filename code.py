@@ -32,8 +32,7 @@ start_timestamp, end_timestamp = st.slider(
     "Select Date Range",
     min_value=min_timestamp,
     max_value=max_timestamp,
-    value=(min_timestamp, max_timestamp),
-    format="YYYY-MM-DD"  # Ensuring the format is readable
+    value=(min_timestamp, max_timestamp)
 )
 
 # Convert the timestamps back to datetime
@@ -54,7 +53,7 @@ fig = px.line(filtered_data,
               x='Date',  # Use 'Date' column for the x-axis
               y=['Open', 'close', 'High', 'Low'],  # Plot Open, Close, High, and Low prices
               labels={'Date': 'Date', 'value': 'Stock Value'},
-              )
+              title=f'Stock Analysis Chart from {start_date.date()} to {end_date.date()}')
 
 # Updating the layout and legend
 fig.update_layout(
