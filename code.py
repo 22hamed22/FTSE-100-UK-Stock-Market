@@ -30,18 +30,12 @@ start_timestamp, end_timestamp = st.slider(
     min_value=min_timestamp,
     max_value=max_timestamp,
     value=(min_timestamp, max_timestamp),
-    format="YYYY-MM-DD",
-    step=3600*24,  # Step is 1 day (in seconds)
-    help="Drag the slider to select the time range",
-    key="date_slider"
+    format="YYYY-MM-DD"
 )
 
 # Convert the timestamps back to datetime
 start_date = pd.to_datetime(start_timestamp, unit='s')
 end_date = pd.to_datetime(end_timestamp, unit='s')
-
-# Display the selected time range below the slider
-st.write(f"Selected Time Range: {start_date.date()} to {end_date.date()}")
 
 # Filter the data based on the selected date range
 filtered_data = data[(data['Date'] >= start_date) & (data['Date'] <= end_date)]
