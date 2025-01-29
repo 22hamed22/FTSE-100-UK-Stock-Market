@@ -4,7 +4,14 @@ from itertools import cycle
 import streamlit as st
 from sklearn.preprocessing import MinMaxScaler
 import numpy as np
-import tensorflow 
+
+try:
+    import tensorflow as tf
+    st.write(f"TensorFlow version: {tf.__version__}")
+except ImportError as e:
+    st.write(f"Error importing TensorFlow: {e}")
+    
+#import tensorflow 
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import LSTM, Dense
 from sklearn.model_selection import train_test_split
