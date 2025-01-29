@@ -54,7 +54,7 @@ fig = px.line(filtered_data,
               x='Date',  # Use 'Date' column for the x-axis
               y=['Open', 'close', 'High', 'Low'],  # Plot Open, Close, High, and Low prices
               labels={'Date': 'Date', 'value': 'Stock Value'},
-              title=f'Stock Analysis Chart from {start_date.date()} to {end_date.date()}')
+              )
 
 # Updating the layout and legend
 fig.update_layout(
