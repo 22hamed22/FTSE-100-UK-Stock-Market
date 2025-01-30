@@ -4,19 +4,16 @@ from itertools import cycle
 import streamlit as st
 from sklearn.preprocessing import MinMaxScaler
 import numpy as np
+import torch
+import torch.nn as nn
+import torch.optim as optim
 
+# Check if PyTorch is installed
 try:
-    import tensorflow as tf
-    print("TensorFlow is installed.")
-    print("TensorFlow version:", tf.__version__)
+    import torch
+    print("PyTorch is installed.")
 except ImportError:
-    print("TensorFlow is not installed.")
-
-
-#import tensorflow 
-from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import LSTM, Dense
-from sklearn.model_selection import train_test_split
+    print("PyTorch is not installed.")
 
 # Streamlit file uploader
 st.title("FTSE 100 UK Stock Analysis and Prediction")
@@ -101,25 +98,45 @@ if data is not None:
     # Reshaping X for LSTM input (samples, time steps, features)
     X = np.reshape(X, (X.shape[0], X.shape[1], 1))
 
-    # Split data into training and test sets (80% train, 20% test)
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, shuffle=False)
+    # Convert the data to PyTorch tensors
+    X_train = torch.tensor(X, dtype=torch.float32)
+    y_train = torch.tensor(y, dtype=torch.float32)
 
-    # Define and train the LSTM model
-    model = Sequential()
-    model.add(LSTM(units=50, return_sequences=True, input_shape=(X_train.shape[1], 1)))
-    model.add(LSTM(units=50, return_sequences=False))
-    model.add(Dense(units=1))  # Output layer with one unit (next day's price)
+    # Define the LSTM model using PyTorch
+    class LSTMModel(nn.Module):
+        def __init__(self, input_size=1, hidden_layer_size=50, output_size=1):
+            super(LSTMModel, self).__init__()
+            self.lstm = nn.LSTM(input_size, hidden_layer_size, batch_first=True)
+            self.fc = nn.Linear(hidden_layer_size, output_size)
 
-    # Compile and train the model
-    model.compile(optimizer='adam', loss='mean_squared_error')
-    model.fit(X_train, y_train, epochs=10, batch_size=32, verbose=1)
+        def forward(self, x):
+            lstm_out, _ = self.lstm(x)
+            predictions = self.fc(lstm_out[:, -1])
+            return predictions
+
+    # Instantiate and train the model
+    model = LSTMModel()
+    criterion = nn.MSELoss()
+    optimizer = optim.Adam(model.parameters(), lr=0.001)
+
+    # Train the model for 10 epochs
+    for epoch in range(10):
+        model.train()
+        optimizer.zero_grad()
+        output = model(X_train)
+        loss = criterion(output.squeeze(), y_train)
+        loss.backward()
+        optimizer.step()
+        print(f'Epoch {epoch+1}, Loss: {loss.item()}')
 
     # Predicting the stock prices
-    predicted_stock_price = model.predict(X_test)
-    
+    model.eval()
+    with torch.no_grad():
+        predicted_stock_price = model(X_train).numpy()
+
     # Inverse transform the predictions
     predicted_stock_price = scaler.inverse_transform(predicted_stock_price)
-    real_stock_price = scaler.inverse_transform(y_test.reshape(-1, 1))
+    real_stock_price = scaler.inverse_transform(y_train.reshape(-1, 1))
 
     # Plotting the results (real vs predicted)
     predicted_df = pd.DataFrame({'Date': filtered_data['Date'].iloc[-len(predicted_stock_price):], 
