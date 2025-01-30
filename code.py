@@ -3,10 +3,9 @@ import plotly.express as px
 from itertools import cycle
 import streamlit as st
 from sklearn.preprocessing import MinMaxScaler
+
 import numpy as np
-import torch
-import torch.nn as nn
-import torch.optim as optim
+
 
 # Check if PyTorch is installed
 try:
@@ -14,6 +13,11 @@ try:
     print("PyTorch is installed.")
 except ImportError:
     print("PyTorch is not installed.")
+import torch
+import torch.nn as nn
+import torch.optim as optim
+
+
 
 # Streamlit file uploader
 st.title("FTSE 100 UK Stock Analysis and Prediction")
