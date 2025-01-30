@@ -7,10 +7,12 @@ import numpy as np
 
 try:
     import tensorflow as tf
-    st.write(f"TensorFlow version: {tf.__version__}")
-except ImportError as e:
-    st.write(f"Error importing TensorFlow: {e}")
-    
+    print("TensorFlow is installed.")
+    print("TensorFlow version:", tf.__version__)
+except ImportError:
+    print("TensorFlow is not installed.")
+
+
 #import tensorflow 
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import LSTM, Dense
