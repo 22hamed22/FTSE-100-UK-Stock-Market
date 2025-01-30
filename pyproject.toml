@@ -1,8 +1,8 @@
 [tool.poetry]
-name = "demo-face-gan"
+name = "your-project-name"
 version = "0.1.0"
-description = "Demonstrates creating faces with a GAN"
-authors = ["Adrien Treuille <adrien.g.treuille@gmail.com>"]
+description = "Your project description"
+authors = ["Your Name <your.email@example.com>"]
 
 [tool.poetry.dependencies]
 python = ">=3.6,<=3.7.16"
@@ -11,11 +11,10 @@ tensorflow = ">=1.15.4,<2.0"
 scikit_learn = ">=0.20.0"
 
 [tool.poetry.dev-dependencies]
-black = "*"  # Pretty formatting of Python code
-pynvim = "*" # Allows nvim users to use black formatting
+black = "*"  # Code formatting with Black
+pynvim = "*"  # Allows nvim users to use Black formatting
 
 [[tool.poetry.source]]
-name = 'default'
-url = 'https://pypi.python.org/simple'
+name = "default"
+url = "https://pypi.python.org/simple"
 secondary = false
-
