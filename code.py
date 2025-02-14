@@ -4,17 +4,19 @@ import plotly.express as px
 from plotly.subplots import make_subplots
 import plotly.graph_objects as go
 from itertools import cycle
+import os
 
 # Streamlit title
 st.title("FTSE 100 UK Stock Analysis and Prediction")
 st.write("Visualize FTSE 100 stock data and predict future prices.")
 
 # ---------------------------------------------------------
-# Upload the dataset once
-data = st.file_uploader("Upload FTSE 100 CSV Data", type="csv")
-if data is not None:
+# Automatically load the dataset from a local path
+file_path = "ftse_data.csv"  # Ensure this is in the same directory as your app
+
+if os.path.exists(file_path):
     # Load the dataset
-    data = pd.read_csv(data)
+    data = pd.read_csv(file_path)
 
     # Rename columns for consistency and convenience
     data = data.rename(columns={'Price': 'close', 'Vol.': 'volume', 'Change %': 'change', 'Predicted_Close': 'Predicted_Close'})
@@ -158,3 +160,6 @@ if data is not None:
                       xaxis_visible=False, yaxis_visible=False, plot_bgcolor="white")
 
     st.plotly_chart(fig)
+
+else:
+    st.error(f"File {file_path} not found.")
