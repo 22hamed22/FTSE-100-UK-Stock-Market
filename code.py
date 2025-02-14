@@ -12,7 +12,7 @@ st.write("Visualize FTSE 100 stock data and predict future prices.")
 
 # ---------------------------------------------------------
 # Automatically load the dataset from a local path
-file_path = "ftse_data.csv"  # Ensure this is in the same directory as your app
+file_path = "FTSE-100.csv"  # Ensure this is in the same directory as your app
 
 if os.path.exists(file_path):
     # Load the dataset
