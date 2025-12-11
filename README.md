@@ -1,5 +1,8 @@
 # FTSE-100-UK-Stock-Market
 
+web-app:
+https://ftse-100-uk-stock-market-v3eg5eqplt4qrda93q8grg.streamlit.app/
+
 📈 FTSE 100 Time-Series Forecasting (LSTM Model)
 
 This project focuses on analysing and forecasting FTSE 100 stock data using deep learning techniques. The workflow includes data cleaning, exploratory data analysis (EDA), feature engineering, and building an LSTM model that achieved 1.1 MAPE on validation data.
